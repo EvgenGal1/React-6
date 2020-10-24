@@ -1,3 +1,4 @@
 {
-    "presets": ["@babel/preset-env", "@babel/preset-react"]
+	// моно указать в webpack.config. спрева ищем нововедения js и перевод их в старый формат,  затем в них искать react элементы и их переделывать в js 
+	"presets": ["@babel/preset-env", "@babel/preset-react"]
 }
