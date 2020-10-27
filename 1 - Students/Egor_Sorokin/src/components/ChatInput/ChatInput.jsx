@@ -17,6 +17,12 @@ export default class ChatInput extends React.Component {
         this.setState({ text: '' });
     }
 
+    sendOnKeyboard = (e) => {
+        if (e.key == 'Enter') {
+            this.send();
+        }
+    }
+
     changeInput = event => {
         let val = event.target.value;
         this.setState( {text: val} );
@@ -25,10 +31,10 @@ export default class ChatInput extends React.Component {
     render() {
         let { text } = this.state;
         return(
-            <div className="chatInput d-flex">
-                <input type="text" className = "inputTextBox" value= { text } onChange = { this.changeInput } />
-                <div className="buttonsBlock">
-                    <button className="chatInputButton sendButton" onClick={ this.send }><FontAwesomeIcon icon={faEnvelope} /></button>
+            <div className="chat-input d-flex">
+                <input type="text" className = "input-text-box" value= { text } onChange = { this.changeInput } onKeyPress = { this.sendOnKeyboard } />
+                <div className="buttons-block">
+                    <button className="chat-input-button send-button" onClick={ this.send }><FontAwesomeIcon icon={faEnvelope} /></button>
                 </div>
             </div>
         )

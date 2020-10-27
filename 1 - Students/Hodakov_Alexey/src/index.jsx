@@ -1,18 +1,22 @@
-import React from "react";
-import ReactDom from "react-dom";
-import "./layout/styles/style.css";
+import React from 'react';
+import ReactDom from 'react-dom';
+import 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Header from "./components/header/Header.jsx";
-import Main from "./components/main/main.jsx";
-import Footer from "./components/footer/Footer.jsx";
+import { BrowserRouter } from 'react-router-dom';
+import Router from './router.jsx';
 
-const app = document.querySelector("#app");
+import { Provider } from 'react-redux';
+import initStore from './store';
+
+const app = document.querySelector('#app');
 
 ReactDom.render(
-  <div className="container">
-    <Header />
-    <Main />
-    <Footer />
-  </div>,
-  app
-);
+    <Provider store = { initStore() }>
+        <BrowserRouter>
+            <Router />
+        </BrowserRouter>
+    </Provider>
+    ,
+    app
+)

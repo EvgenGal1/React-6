@@ -1,6 +1,7 @@
 import './style.css'
 import React, { Component } from 'react'
 
+
 export default class ChatInput extends Component {
     constructor(props) {
         super(props);
@@ -19,11 +20,18 @@ export default class ChatInput extends Component {
         this.setState({ text: '' });
     }
 
+    sendKey = (event) => {
+        if (event.keyCode === 13){
+            this.props.send(this.state.text);
+            this.setState({ text: '' });
+            }
+    }
+
     render() {
         let { text } = this.state;
         return (
             <div className="d-flex flex-row">
-                <input type="text" value = { text } onChange = { this.changeText } className="form-control"/>
+                <input type="text" value = { text } onChange = { this.changeText } onKeyUp={ (event) => this.sendKey(event)} className="form-control"/>
                 <button onClick = { this.send } className="btn btn-primary" >Send</button>
             </div>
         )

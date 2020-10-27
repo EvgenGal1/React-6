@@ -1,0 +1,20 @@
+.ChatInput{
+    width: 100%;
+}
+.input{
+    width: 80%;
+    min-height: 50px;
+    background-color: rgb(250, 195, 243);
+    padding: 15px 15px;
+    border: rgb(250, 110, 231);
+    font-size: 18px;
+    margin: 0;
+}
+.button{
+    width: 20%;
+    background-color: rgb(250, 110, 231);
+    padding: 15px 15px;
+    border:rgb(250, 110, 231);
+    font-size: 18px;
+    font-weight: bold;
+}
