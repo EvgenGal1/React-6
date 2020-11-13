@@ -3,15 +3,26 @@ import ReactDom from 'react-dom'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+import { BrowserRouter } from 'react-router-dom'
+import Router from './router.jsx'
+
+import { Provider } from 'react-redux';
+import initStore from './store';
+
+
 const app = document.querySelector('#app');
 
 
-import Messages from './components/Messages/Messages.jsx'
+
+
 
 
 ReactDom.render(
-    <div className="wrapper">
-        <Messages />
-    </div>,
+    <Provider store = { initStore() }>
+        <BrowserRouter>
+            <Router />
+        </BrowserRouter>
+    </Provider>
+    ,
     app
 )

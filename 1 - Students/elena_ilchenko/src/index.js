@@ -2,12 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import Messages from './components/Messages/Messages';
+import Router from './components/Router/Router';
+import { BrowserRouter } from 'react-router-dom';
 
+import { StylesProvider } from '@material-ui/core/styles';
+
+import { Provider } from 'react-redux';
+import initStore from './store';
 
 
 ReactDOM.render(
-  <Messages />,
+  <Provider store={ initStore() }>
+    <BrowserRouter>
+      <StylesProvider>
+          <Router />
+      </StylesProvider>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById('root')
 );
 

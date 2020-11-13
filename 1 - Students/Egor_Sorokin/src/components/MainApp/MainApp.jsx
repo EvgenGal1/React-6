@@ -2,38 +2,27 @@ import './style.css'
 
 import React from 'react'
 
-import Conversations from '../Conversations/Conversations.jsx'
 import Messages from '../Messages/Messages.jsx'
+import MessagesBlank from '../MessagesBlank/MessagesBlank.jsx'
+import ChatList from '../ChatList/ChatList.jsx'
 
-export default class MainApp extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-            activeConv: {
-                id: '',
-                avatar: '',
-                name: '',
-            }
+export default props => {
+
+    let { me, myAvatar, chatId } = props;
+
+    let messagesRender = () => {
+        if (chatId == '-1') {
+            return (<MessagesBlank myAvatar = { myAvatar } />)
+        } else {
+            return (<Messages author = { me } activeId={ chatId }  />)
         }
     }
-
-    getActiveConv = (id, avatar, name) => {
-        console.log (name);
-        this.setState({activeConv: {
-            id: id,
-            avatar: avatar,
-            name: name,
-        }});
-    }
-
-    render() {
-
         return(
             <main>
                 <div className="row">
-                    <Conversations getFunction = {this.getActiveConv} />
-                    <Messages author = 'Egor' currConversationName={this.state.activeConv.name} avatarAddress={this.state.activeConv.avatar} />
+                    <ChatList author = { me } activeIndex = { chatId } /> 
+                    { messagesRender() }
                 </div>
             </main>
-    )}
+        )
 }
