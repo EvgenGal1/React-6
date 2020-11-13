@@ -1,0 +1,18 @@
+1) $$ npm init -y
+   инициализируем в этом каталоге проект. создается файл package.json. npm работает с этой папкой как с нашим проектом
+2) $$ npm i -D webpack webpack-cli webpack-dev-server
+   установка webpack, cli, dev-server. окружение. наша сборка. создается файл package-lock.json.
+3) создаем папки и файлы:
+   webpack.config.js
+   .babelrc
+   /components
+      readme
+      */Start
+         Start.jsx
+         style.css
+   /layout
+      index.jsx - стартовый файл для проекта. синтаксис react. теги html в самом js, с помощью bable переводяться в понятный код, скажем для IE
+      /css
+         readme
+4) $$ npm i -D @babel/core @babel/preset-env @babel/preset-react @babel/plugin-proposal-class-properties babel-loader
+   разбор dev зависимостей. core - переводчик, env - набор настроек новинок, пример стандарты JS, react - обработка JSX (jsx - преврашение html из js в понятный код), plugin - для удобства,  
