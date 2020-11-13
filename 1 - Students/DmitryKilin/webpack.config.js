@@ -34,7 +34,15 @@ module.exports = {
                     ],
                     // preset: ["@babel/preset-env", "@babel/preset-react"]
                 }
-            }
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
+            },
         ]
     },
     plugins: [
@@ -53,13 +61,18 @@ module.exports = {
             favicon: "./src/favicon.png",
         })
     ],
+    devtool: 'cheap-inline-module-source-map',
     devServer: {
         port: 3300,
         hot: true,
         open: false,
-        historyApiFallback: {
-            index: 'index.html'
-            },
-    },
-    devtool: 'cheap-inline-module-source-map',
+        proxy: {
+            '/api': {
+                target: 'http://localhost:4000',
+                pathRewrite: { '^/api' : '' },
+                secure: false,
+                changeOrigin: true
+            }
+        }
+    }
 }

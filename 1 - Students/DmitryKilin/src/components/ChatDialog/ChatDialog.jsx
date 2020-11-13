@@ -1,6 +1,6 @@
 
 import './style.css'
-import React, { Component, Fragment } from 'react'
+import React, {Component, Fragment, useEffect} from 'react'
 import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,13 +12,17 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import PersonIcon from '@material-ui/icons/Person';
+// import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
 import Typography from '@material-ui/core/Typography';
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
-
+import paths from "path";
+import { newChat } from '../../store/actions/chats.actions.js'
+import {loadContacts} from "../../store/actions/contacts.actions.js";
+// import {contacts} from "../../moduls/Contacts/Contacts";
+// import {contactsReducer} from "../../store/reducers/contacts.reducer.js";
 
 const useStyles = makeStyles({
     'test-class': {
@@ -39,18 +43,19 @@ const useStyles = makeStyles({
 
 function SimpleDialog(props) {
     const classes = useStyles();
-    const { onClose, selectedValue, open } = props;
+
+    const { contacts, open } = props;
+    // const { onClose, selectedValue, open } = props;
 
     const handleClose = () => {
         onClose(selectedValue);
     };
 
-    const contacts = [...props.contacts]
+    // const contacts = [...props.contacts]
 
     const handleListItemClick = (value) => {
         onClose(value);
     };
-    console.log(props)
     return (
             <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
                 <DialogTitle id="simple-dialog-title" className={classes.dialogTitle}>
@@ -58,12 +63,12 @@ function SimpleDialog(props) {
                 </DialogTitle>
                 <List className={classes.list}>
                     {contacts.map((contact) => (
-                    <ListItem button onClick={() => handleListItemClick(contact.email)} key={contact.email}>
+                    <ListItem button onClick={() => handleListItemClick(contact.name)} key={contact.email}>
                         <ListItemAvatar>
-                        <Avatar alt="X" src={'/src/img/'+contact.avatar}>
+                        <Avatar alt="X" src={paths.join('/src','img', contact.avatar)}>
                         </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary={contact.email} className = { classes['test-class'] } />
+                        <ListItemText primary={contact.name} className = { classes['test-class'] } />
                     </ListItem>
                     ))}
 
@@ -83,16 +88,15 @@ function SimpleDialog(props) {
 SimpleDialog.propTypes = {
     onClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,
-    selectedValue: PropTypes.string.isRequired,
+    // selectedValue: PropTypes.string.isRequired,
 };
 
 function SimpleDialogDemo(props) {
 
     const [open, setOpen] = React.useState(false);
 
-    const contacts = [...props.contactsFromRedux]
-
-    const [selectedValue, setSelectedValue] = React.useState(contacts[1].email);
+    // const contacts = [...props.contactsFromRedux]
+    // const [selectedValue, setSelectedValue] = React.useState(contacts[1].name);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -100,24 +104,29 @@ function SimpleDialogDemo(props) {
 
     const handleClose = (value) => {
         setOpen(false);
-        setSelectedValue(value);
+        // setSelectedValue(value);
+        // props.newChat(value)
     };
+
+    useEffect(() => {
+        props.loadContacts('/api/chats/')
+        console.log(props.contactsFromRedux)
+    })
+
 
     return (
         <div>
-            <Typography variant="subtitle1">Selected: {selectedValue}</Typography>
-                <br />
             <Button variant="outlined" color="primary" onClick={handleClickOpen}>
                 new chat
             </Button>
-                <SimpleDialog selectedValue={selectedValue} open={open} onClose={handleClose} contacts={contacts}/>
+            <SimpleDialog  open={open} onClose={handleClose} contacts={props.contactsFromRedux}/>
+
+            {/*<SimpleDialog selectedValue={props.contactsFromRedux[0]} open={open} onClose={handleClose} contacts={props.contactsFromRedux}/>*/}
         </div>
     );
 }
 
-const mapStateToProps = ({contactsReducer}) => ({
-    contactsFromRedux: contactsReducer.contacts
-});
-const mapDispatchToProps = dipatch => bindActionCreators({}, dipatch);
+const mapStateToProps = ( {contactsReducer} ) => ( {contactsFromRedux: contactsReducer.contacts} );
+const mapDispatchToProps = dispatch => bindActionCreators( {loadContacts}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleDialogDemo)
