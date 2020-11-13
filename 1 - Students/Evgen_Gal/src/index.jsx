@@ -1,18 +1,21 @@
-import React from 'react'
 // импорт класса или объекта
-import ReactDom from 'react-dom'
+import React from 'react'
 // отвечает за отображени в DOM
+import ReactDom from 'react-dom'
+// импорт бутстрап
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const app = document.querySelector('#app');
 
 import Start from './components/Start/Start.jsx'
 
-// метод с 2 параметрами. 1 - что мы хотим отрендарить (можем представлять в различных видах), 2 - где хотим отрендарить
+// 1. метод с 2 параметрами. 1 - что мы хотим отрендарить (можем представлять в различных видах), 2 - где хотим отрендарить
 ReactDom.render(
-    <div className="wrapper">
-        <Start name="John" />
-    </div>,
-    app
+	<div className="wrapper">
+		<Start name="John" />
+	</div>,
+	app
 )
 
 

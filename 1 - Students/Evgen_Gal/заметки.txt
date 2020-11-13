@@ -1,23 +1,43 @@
 	1............................
-1) $$ npm init -y
-   инициализируем в этом каталоге проект. создается файл package.json. npm работает с этой папкой как с нашим проектом
-2) $$ npm i -D webpack webpack-cli webpack-dev-server
-   установка webpack, cli, dev-server. окружение. наша сборка. создается файл package-lock.json.
+1) инициализируем в этом каталоге проект. создается файл package.json. npm работает с этой папкой как с нашим проектом
+	$$ npm init -y
+   
+2) установка webpack, cli, dev-server. окружение. наша сборка. создается файл package-lock.json.
+	$$ npm i -D webpack webpack-cli webpack-dev-server
+   
 3) создаем папки и файлы:
    webpack.config.js
    .babelrc
-   /components
+   /src/components
       readme
-      */Start
+      /Start
          Start.jsx
-         style.css
+   		style.css
    /layout
       index.jsx - стартовый файл для проекта. синтаксис react. теги html в самом js, с помощью bable переводяться в понятный код, скажем для IE
       /css
          readme
-4) $$ npm i -D @babel/core @babel/preset-env @babel/preset-react @babel/plugin-proposal-class-properties babel-loader
-   разбор dev зависимостей. core - переводчик, env - набор настроек новинок, пример стандарты JS, react - обработка JSX (jsx - преврашение html из js в понятный код), plugin - для удобства,  
+4)  разбор dev зависимостей. core - переводчик, env - набор настроек новинок, пример стандарты JS, react - обработка JSX (jsx - преврашение html из js в понятный код), plugin - для удобства,
+	$$ npm i -D @babel/core @babel/preset-env @babel/preset-react @babel/plugin-proposal-class-properties babel-loader
+
+5) запуск установки
+	$$ npm run dev
 
 	2.................................
 
-	
+1) без стейтов
+   ?директивы?
+2) создаем компоненты и их папки с файлами.
+	компоненты деляться на типы: 1. обычн компоненты(stateles) - отдаёт конечную верстку(принимает пропы и отдает вертску); 2. контейнеры(statfull) - это компон. котор содерж в себе логику. 3. контролеры - компонеты которые содержат несколько компонентов формы объединёных общей задачей (будут происход разные события(набор текста, нажатие на кнопку) но они объедины в одну задачу(взять текст и перекинуть в массив сообщений)). в react контейнера имеют внетр состояние - state, обычн компон. могут не иметь stete.
+	/src/components
+		/Message - компонент(stateles)(функция), который будет возвращать конечную верстку нашего сообщения.
+			Message.jsx
+			style.css
+		/Messages - компонент обертка(statfull)(класс), принимает на себя всю логику рендера наших сообшений в зависимости от того сколько их там находиться на данный момент 
+			Messages.jsx
+			style.css
+		/ChatInput - кнопка и текстбокс. контролер.
+			ChatInput.jsx
+			style.css
+
+		
