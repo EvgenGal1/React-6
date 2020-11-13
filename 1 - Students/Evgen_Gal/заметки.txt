@@ -1,3 +1,4 @@
+	1............................
 1) $$ npm init -y
    инициализируем в этом каталоге проект. создается файл package.json. npm работает с этой папкой как с нашим проектом
 2) $$ npm i -D webpack webpack-cli webpack-dev-server
@@ -16,3 +17,7 @@
          readme
 4) $$ npm i -D @babel/core @babel/preset-env @babel/preset-react @babel/plugin-proposal-class-properties babel-loader
    разбор dev зависимостей. core - переводчик, env - набор настроек новинок, пример стандарты JS, react - обработка JSX (jsx - преврашение html из js в понятный код), plugin - для удобства,  
+
+	2.................................
+
+	
