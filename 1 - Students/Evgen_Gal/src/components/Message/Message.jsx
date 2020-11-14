@@ -1,3 +1,4 @@
+// 2. statles компонент
 import './style.css'
 import React from 'react'
 
@@ -5,7 +6,7 @@ import React from 'react'
 export default props => {
 	// 2. достаем из проп кто `оттправитель` смс и текст
 	let { sender, text } = props;
-	// 2. возвращ вёртску. сложн вёрстку возвращать в скобках чтоб не было потерь
+	// 2. возвращ вёртску. сложную вёрстку возвращать в скобках чтоб не было потерь
 	return (
 		<div className="d-flex flex-column msg">
 			<strong>{sender}</strong>
