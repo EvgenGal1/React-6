@@ -4,16 +4,18 @@ import React from 'react'
 import ReactDom from 'react-dom'
 // импорт бутстрап
 import 'bootstrap'
+// импорт класса бутстрапа
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const app = document.querySelector('#app');
 
-import Start from './components/Start/Start.jsx'
+// 2. импорт Messages
+import Messages from './components/Messages/Messages.jsx'
 
 // 1. метод с 2 параметрами. 1 - что мы хотим отрендарить (можем представлять в различных видах), 2 - где хотим отрендарить
 ReactDom.render(
 	<div className="wrapper">
-		<Start name="John" />
+		<Messages />
 	</div>,
 	app
 )

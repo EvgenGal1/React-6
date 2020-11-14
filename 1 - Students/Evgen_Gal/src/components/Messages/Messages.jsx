@@ -1,6 +1,7 @@
 import './style.css'
 import React, { Component } from 'react'
 
+// 2. импорт компонент	
 import Message from '../Message/Message.jsx'
 
 import ChatInput from '../ChatInput/ChatInput.jsx'
@@ -15,7 +16,7 @@ export default class Messages extends Component {
 		this.state = {
 			// 2. поле messages - массив объектов
 			messages: [
-				// 2. поля получат и тектом 
+				// 2. поля получателя и текст 
 				{ sender: 'Bot', text: '...' },
 				{ sender: 'Me', text: 'Some text 1' },
 				{ sender: 'Me', text: 'Some text2' },
@@ -43,12 +44,14 @@ export default class Messages extends Component {
 		//here bot adds message
 	}
 
-	// 2.
+	// 2. функц render созд массив на основе массива смс
 	render() {
+		// 2. ссылаемся на this.state - то что достунпо по ссылку через this внутри всего нашего класса
 		let { messages } = this.state;
+		// созд массив на основе массива смс
 		let messagesArray = messages.map((msg, i) => <Message sender={msg.sender} text={msg.text} key={i} />);
 
-		// 2.
+		// 2. возвращает всю верстку из компонента-класса
 		return (
 			<div className="d-flex flex-column align-items-center">
 				<div className="msg-wrap">
