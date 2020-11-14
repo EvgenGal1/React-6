@@ -1,4 +1,4 @@
-// 2. statles компонент
+// 2. stateles компонент
 import './style.css'
 import React from 'react'
 

@@ -1,4 +1,4 @@
-// 2. statfull компонент
+// 2. statefull компонент
 import './style.css'
 import React, { Component } from 'react'
 

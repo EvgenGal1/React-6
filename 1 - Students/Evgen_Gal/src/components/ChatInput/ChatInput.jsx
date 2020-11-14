@@ -1,4 +1,4 @@
-// 2. statfull компонент (конструктор)
+// 2. statefull компонент (конструктор)
 import './style.css'
 import React, { Component } from 'react'
 
