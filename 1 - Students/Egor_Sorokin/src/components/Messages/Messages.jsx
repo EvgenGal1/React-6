@@ -15,28 +15,10 @@ import { sendMessage } from '../../store/actions/messages.actions'
 class Messages extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { 
-
-        }
     }
 
     componentDidUpdate() {
-
-        setTimeout(() => {
-            let { conversations, author, users, activeId } = this.props;
-            let { userId, messages } = conversations[activeId];
-
-            const lastSender = messages[messages.length - 1].sender
-            let lastSenderName;
-        
-            if (lastSender == author) {
-                lastSenderName = users.find(item => item.id == lastSender).name;
-                this.addMessage(userId, 'Hello, ' + lastSenderName + '! Please, wait for respond...')
-            }
-        }, 1000);
-
         this.scrollDown();
-        
     }
 
     addMessage = (senderId, text) => {
@@ -50,24 +32,29 @@ class Messages extends React.Component {
     }
 
     render() {
-        let { author, conversations, activeId, chats, users } = this.props;
-        let messages = conversations[activeId].messages;
+        let { author, conversations, messages, activeId, chats, users } = this.props;
+        let messagesArray = conversations.find(item => item.id == activeId).messages;
         
         let authorUser = users.find(item => item.id == author);
         let authorName = authorUser.name
         let authorAvatar = authorUser.avatar;
 
-        let msgsRender = messages.map((msg, i) => {
-            let senderName = users.find(item => item.id == msg.sender).name;
+        let otherUser = users.find(item => item.id == conversations.find(item => item.id == activeId).userId)
+
+        let msgsRender = messagesArray.map((msg, i) => {
+            let thisMessage = messages.find(item => item.id == msg)
+            let senderName = users.find(item => item.id == thisMessage.sender).name;
             return (
-                <Message author = { authorName } sender = { senderName } text = { msg.text } key = { i } />
+                <Message author = { authorName } sender = { senderName } text = { thisMessage.text } key = { i } />
             )
         }
         )
 
+        let activePosition = chats.findIndex(item => item.id == activeId)
+
         return(
             <div className="messages-container col-sm-8">
-                <MessagesHeader currConversationName={ chats[activeId].name } avatarAddress={ chats[activeId].avatar } myAvatar = { authorAvatar }/>
+                <MessagesHeader currConversationName={ otherUser.name } avatarAddress={ otherUser.avatar } myAvatar = { authorAvatar }/>
                 <div className="messages-inner-container">
                     { msgsRender }
                     <div className="scroll-pointer" ref={ item => this.scrollPointer = item }></div>
@@ -80,6 +67,7 @@ class Messages extends React.Component {
 
 const mapStateToProps = ({ messagesReducer, chatsReducer, usersReducer }) => ({
     conversations: messagesReducer.conversations,
+    messages: messagesReducer.messages,
     users: usersReducer.users,
     chats: chatsReducer.chats,
 });

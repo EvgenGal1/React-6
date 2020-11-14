@@ -1,55 +1,54 @@
 import './style.css'
 import React, { Component } from 'react'
-import ChatDialog from '../ChatDialog/ChatDialog.jsx'
 import {Link} from 'react-router-dom';
-import Avatar from '@material-ui/core/Avatar';
 
 import {connect} from 'react-redux';
 import {bindActionCreators} from "redux";
 import {makeStyles} from "@material-ui/core/styles";
 
+import { loadChats } from '../../store/actions/chats.actions.js'
+import Typography from "@material-ui/core/Typography";
+import SelectUserDialog from "../SelectUserDialog/SelectUserDialog.jsx"
+
+
 class ChatsList extends Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        //     chats: this.props.chats.slice(),
-        //     activeChatId: this.props.activeChatId,
-        // }
+    }
+
+    componentDidMount() {
+        this.props.loadChats('/api/chats/');
     }
 
 
     render() {
-        const classes = makeStyles({
-            'link': {
-                color: '#16B5E8'
-            }
-        })
+
+        let {user, chatsFromRedux, activeChatId} = this.props
 
         return (
             <div className="chat-list">
                 <header>
-                        <Avatar alt="X" src="./src/img/tarantino.jpg"></Avatar>
+                    <SelectUserDialog/>
+                    <Typography variant="body1" className={'typo'}>{user.name}</Typography>
+                    <Typography variant="body1" className={'typo'}>{user.email}</Typography>
                     <h2 className={"chat-list__header"}>Lets chat:</h2>
                 </header>
 
                 <ul>
-                    {this.props.chatsFromRedux.map( chat =>
-                        <li key = {chat.id} className={chat.id===this.props.activeChatId ? 'li-marked' : 'li-unmarked'}>
-                            <Link to={`/chat/${chat.id}`} className={classes.link}>{chat.title}</Link>
+                    {chatsFromRedux.map( chat =>
+                        <li key = {chat.id} className={chat.id===activeChatId ? 'li-marked' : 'li-unmarked'}>
+                            <Link to={`/chat/${chat.id}`}>{chat.title}</Link>
                         </li>)}
                 </ul>
-                <div>
-                    <ChatDialog/>
-                </div>
             </div>
         )
     }
 }
 
 
-const mapStateToProps = ({chatsReducer}) => ({
-    chatsFromRedux: chatsReducer.chats
+const mapStateToProps = ({chatsReducer, userReducer} ) => ({
+    chatsFromRedux: chatsReducer.chats, user: userReducer
 });
-const mapDispatchToProps = dipatch => bindActionCreators({}, dipatch);
+const mapDispatchToProps = dispatch => bindActionCreators({loadChats}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatsList)
