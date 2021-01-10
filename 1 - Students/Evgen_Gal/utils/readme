@@ -1,0 +1,4 @@
+// создает statefull component 
+npm run cr-full Name
+// создает stateless component 
+npm run cr-less Name

@@ -51,11 +51,20 @@ export default class Messages extends Component {
 	}
 
 	// 2. `компонент обновился`
-	//? 2. ДЗ
-	//? В componentDidUpdate организоать чтоб при написании смс должен отвечать бот с задержкой(setState добавление message)
+	// 3. 2ДЗ. 	 чтоб при написании смс должен отвечать бот с задержкой(setState добавление message)
 	componentDidUpdate() {
-		console.log('updated')
-		//? 2. here bot adds message (здесь бот добавляет сообщение)
+		// 3. 2ДЗ
+		let { messages } = this.state;
+		// костыль. можеть быть разница в скорости отправки.
+		// проверяем  в синхроном
+		if (messages[messages.length - 1].sender != 'Bot') {
+			// отправляем в асинхроном
+			setTimeout(() => {
+				this.setState({
+					messages: [...messages, { sender: 'Bot', text: "Some text here..." }],
+				})
+			}, 700)
+		}
 	}
 
 	// 2.  - до ChatInput.jsx. когда будем менять текст , то input пробрасываем evt

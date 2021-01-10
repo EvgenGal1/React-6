@@ -1,4 +1,4 @@
-// 2. stateles компонент
+// 2. stateless компонент
 import './style.css'
 import React from 'react'
 
