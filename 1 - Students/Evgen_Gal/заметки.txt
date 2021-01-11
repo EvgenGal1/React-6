@@ -44,11 +44,11 @@
 
 	3.................................
 0) 2ДЗ. В componentDidUpdate организовать ответ бота с задержкой
-1) minimist - пакет node js, достаёт из консоли алиасы(псевдонимы)
+1) minimist - пакет node js, достаёт из консоли алиасы(псевдонимы). опред куски кода для создания
 	$$ npm i -D minimist
 	создаём приложение (3 файла) которое при опред. запуске будет создавать папки, файлы, прокидывать в них базовую структуру (подойдёт и для Vue хотя там и меньше импорт файлов)
 	/utils/superComponentCreator/index.js + statefull.js + stateless.js
-	в package.json в scripts 
+	в package.json в scripts прописываем сокращения
 	//
 	"cr-full": "node utils/superComponentCreator/ --n",
   "cr-less": "node utils/superComponentCreator/ -s --n"
@@ -58,4 +58,14 @@
 	$$ npm run cr-full Name
 	// создает stateless component 
 	$$ npm run cr-less Name
-	
+2) Material UI - это набор компонентов React, который реализует Material Design (язык дизайна, использует макеты на основе сетки, гибкую анимацию и переходы, дополнения и эффекты глубины, такие как освещение и тени. Цель в вещах: Создание, Унификация и Настройка. авроде bootstrap библ с набором компонентов)
+	// ядро со всеми компонентами из material-ui
+	$$ npm i @material-ui/core
+	// иконки 
+	$$ npm i @material-ui/icons
+3) Ещё компонент. Для подкл material-ui
+	$$ npm run cr-full ChatList
+4) Ещё компонент. Основные компоненты material-ui(при импорте скрипта из https://material-ui.com/ru/components/dialogs/#dialog превратим ChatDialog.jsx в кнопку)
+	$$ npm run cr-full ChatDialog
+5) PropTypes - система типов для проверки того, что данные соответствуют ожидаемым типам во время исполнения (propaм прописывать значение по умолчанию и их тип) 
+	$$ npm i prop-types

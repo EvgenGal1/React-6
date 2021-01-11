@@ -6,17 +6,27 @@ import ReactDom from 'react-dom'
 import 'bootstrap'
 // импорт класса бутстрапа
 import 'bootstrap/dist/css/bootstrap.min.css'
+// 3.2 импорт material-ui
+import { StylesProvider } from '@material-ui/core/styles'
 
 const app = document.querySelector('#app');
 
 // 2. импорт Messages
 import Messages from './components/Messages/Messages.jsx'
+// 3.3 импорт ChatList
+import ChatList from './components/ChatList/ChatList.jsx'
 
 // 1. метод с 2 параметрами. 1 - что мы хотим отрендарить (можем представлять в различных видах), 2 - где хотим отрендарить
 ReactDom.render(
-	<div className="wrapper">
-		<Messages />
-	</div>,
+	// 3.2 оборачиваем в material-ui 
+	<StylesProvider>
+		{/* // 3.2 Добавляем стили через material-ui. До был className="wrapper" */}
+		<div className="wrapper d-flex w-100 justify-content-center">
+			{/* 3.3 Добавл ChatList */}
+			<ChatList />
+			<Messages />
+		</div>
+	</StylesProvider>,
 	app
 )
 
